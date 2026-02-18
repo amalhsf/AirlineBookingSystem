@@ -1,11 +1,11 @@
-﻿namespace MyProject.Domain.Booking
+﻿namespace MyProject.Domain.Bookings
 {
     public interface IBookingRepository
     {
         Task AddAsync(Booking booking);
         Task DeleteAsync(int Id);
         Task UpdateAsync(Booking booking);
-        Task<Booking> GetById(int Id);
-        Task<List<Booking>> GetAllAsync(string? filter);
+        Task<Booking> GetByIdAsync(int Id);
+        Task<List<Booking>> GetAllAsync(DateTime? date);
     }
 }

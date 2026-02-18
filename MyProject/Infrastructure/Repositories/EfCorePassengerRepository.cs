@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyProject.Domain.Passenger;
+using MyProject.Domain.Passengers;
 using MyProject.Infrastructure.Database;
+using MyProject.Exceptions;
 
 namespace MyProject.Infrastructure.Repositories
 {
@@ -31,8 +32,11 @@ namespace MyProject.Infrastructure.Repositories
             var result = await _context.Passengers.FirstOrDefaultAsync(x => x.Id == passenger.Id);
             if (result != null)
             {
-                result.Model = airport.Model;
-                result.TotalSeats = airport.TotalSeats;
+                result.FirstName = passenger.FirstName;
+                result.LastName = passenger.LastName;
+                result.DateOfBirth = passenger.DateOfBirth;
+                result.PassportNumber = passenger.PassportNumber;
+                result.BookingId = passenger.BookingId;
                 _context.SaveChanges();
             }
         }
@@ -51,7 +55,8 @@ namespace MyProject.Infrastructure.Repositories
             {
                 return _context.Passengers.ToList();
             }
-            return _context.Passengers.Where(x => x.Name.Contains(filter)).ToList;
+            return _context.Passengers.Where(x => x.FirstName.Contains(filter) || x.LastName.Contains(filter)).ToList();
         }
+
     }
 }

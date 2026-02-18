@@ -1,4 +1,4 @@
-﻿namespace MyProject.Domain.Aircraft
+﻿namespace MyProject.Domain.Aircrafts
 {
     public interface IAircraftRepository
     {

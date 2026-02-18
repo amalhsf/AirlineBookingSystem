@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyProject.Domain.User;
+using MyProject.Domain.Users;
 using MyProject.Infrastructure.Database;
+using MyProject.Exceptions;
 
 namespace MyProject.Infrastructure.Repositories
 {
@@ -14,7 +15,7 @@ namespace MyProject.Infrastructure.Repositories
 
         public async Task AddAsync(User user)
         {
-            _context.Add(passenger);
+            _context.Add(user);
             _context.SaveChanges();
         }
         public async Task DeleteAsync(int id)
@@ -31,8 +32,9 @@ namespace MyProject.Infrastructure.Repositories
             var result = await _context.Users.FirstOrDefaultAsync(x => x.Id == user.Id);
             if (result != null)
             {
-                result.Model = airport.Model;
-                result.TotalSeats = airport.TotalSeats;
+                result.Name = user.Name;
+                result.Email = user.Email;
+                result.PasswordHash = user.PasswordHash;
                 _context.SaveChanges();
             }
         }
@@ -51,7 +53,8 @@ namespace MyProject.Infrastructure.Repositories
             {
                 return _context.Users.ToList();
             }
-            return _context.Users.Where(x => x.Name.Contains(filter)).ToList;
+            return _context.Users.Where(x => x.Name.Contains(filter)).ToList();
         }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyProject.Domain.Aircraft;
+using MyProject.Domain.Aircrafts;
 using MyProject.Infrastructure.Database;
+using MyProject.Exceptions;
 
 namespace MyProject.Infrastructure.Repositories
 {
@@ -22,7 +23,7 @@ namespace MyProject.Infrastructure.Repositories
             var result = await _context.Aircrafts.FirstOrDefaultAsync(x => x.Id == id);
             if (result != null)
             {
-                _context.Remove(aircraft);
+                _context.Remove(result);
                 _context.SaveChanges();
             }
         }
@@ -51,7 +52,7 @@ namespace MyProject.Infrastructure.Repositories
             {
                 return _context.Aircrafts.ToList();
             }
-            return _context.Aircrafts.Where(x => x.Model.Contains(filter)).ToList;
+            return _context.Aircrafts.Where(x => x.Model.Contains(filter)).ToList();
         }
     }
 }

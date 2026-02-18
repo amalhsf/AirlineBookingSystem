@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyProject.Domain.Seat;
+using MyProject.Domain.Seats;
 using MyProject.Infrastructure.Database;
+using MyProject.Exceptions;
 
 namespace MyProject.Infrastructure.Repositories
 {
@@ -14,7 +15,7 @@ namespace MyProject.Infrastructure.Repositories
 
         public async Task AddAsync(Seat seat)
         {
-            _context.Add(passenger);
+            _context.Add(seat);
             _context.SaveChanges();
         }
         public async Task DeleteAsync(int id)
@@ -31,8 +32,7 @@ namespace MyProject.Infrastructure.Repositories
             var result = await _context.Seats.FirstOrDefaultAsync(x => x.Id == seat.Id);
             if (result != null)
             {
-                result.Model = seat.Model;
-                result.TotalSeats = seat.TotalSeats;
+                result.SeatNumber = seat.SeatNumber;
                 _context.SaveChanges();
             }
         }
@@ -51,7 +51,8 @@ namespace MyProject.Infrastructure.Repositories
             {
                 return _context.Seats.ToList();
             }
-            return _context.Seats.Where(x => x.SeatNumber.Contains(filter)).ToList;
+            return _context.Seats.Where(x => x.SeatNumber.Contains(filter)).ToList();
         }
+
     }
 }

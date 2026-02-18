@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyProject.Domain.Airport;
+using MyProject.Domain.Airports;
 using MyProject.Infrastructure.Database;
+using MyProject.Exceptions;
 
 namespace MyProject.Infrastructure.Repositories
 {
@@ -31,8 +32,9 @@ namespace MyProject.Infrastructure.Repositories
             var result = await _context.Airports.FirstOrDefaultAsync(x => x.Id == airport.Id);
             if (result != null)
             {
-                result.Model = airport.Model;
-                result.TotalSeats = airport.TotalSeats;
+                result.Name = airport.Name;
+                result.City = airport.City;
+                result.Country = airport.Country;
                 _context.SaveChanges();
             }
         }
@@ -51,7 +53,8 @@ namespace MyProject.Infrastructure.Repositories
             {
                 return _context.Airports.ToList();
             }
-            return _context.Airports.Where(x => x.Name.Contains(filter)).ToList;
+            return _context.Airports.Where(x => x.Name.Contains(filter)).ToList();
         }
+
     }
 }

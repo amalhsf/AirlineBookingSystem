@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyProject.Domain.Flight;
+using MyProject.Domain.Flights;
 using MyProject.Infrastructure.Database;
+using MyProject.Exceptions;
 
 namespace MyProject.Infrastructure.Repositories
 {
     public class EfCoreFlightRepository : IFlightRepository
     {
         private readonly BookingSystemDbContext _context;
-        public EfCoreBookingRepository(BookingSystemDbContext context)
+        public EfCoreFlightRepository(BookingSystemDbContext context)
         {
             _context = context;
         }
@@ -32,6 +33,12 @@ namespace MyProject.Infrastructure.Repositories
             if (result != null)
             {
                 result.FlightNumber = flight.FlightNumber;
+                result.DepartureAirportId = flight.DepartureAirportId;
+                result.ArrivalAirportId = flight.ArrivalAirportId;
+                result.AircraftId = flight.AircraftId;
+                result.DepartureTime = flight.DepartureTime;
+                result.ArrivalTime = flight.ArrivalTime;
+                result.Price = flight.Price;
                 _context.SaveChanges();
             }
         }
@@ -50,7 +57,8 @@ namespace MyProject.Infrastructure.Repositories
             {
                 return _context.Flights.ToList();
             }
-            return _context.Flights.Where(x => x.FlightNumber.Contains(filter)).ToList;
+            return _context.Flights.Where(x => x.FlightNumber.Contains(filter)).ToList();
         }
+
     }
 }

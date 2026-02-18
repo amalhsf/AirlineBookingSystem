@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyProject.Domain.Booking;
+using Microsoft.IdentityModel.Tokens;
+using MyProject.Domain.Bookings;
+using MyProject.Exceptions;
 using MyProject.Infrastructure.Database;
 
 namespace MyProject.Infrastructure.Repositories
@@ -31,8 +33,10 @@ namespace MyProject.Infrastructure.Repositories
             var result = await _context.Bookings.FirstOrDefaultAsync(x => x.Id == booking.Id);
             if (result != null)
             {
-                result.Model = airport.Model;
-                result.TotalSeats = airport.TotalSeats;
+                result.BookingDate = result.BookingDate;
+                result.UserId = result.UserId;
+                result.FlightId = result.FlightId;
+                result.TotalPrice = result.TotalPrice;
                 _context.SaveChanges();
             }
         }
@@ -45,13 +49,14 @@ namespace MyProject.Infrastructure.Repositories
             }
             return result;
         }
-        public async Task<List<Booking>> GetAllAsync(DateOnly? date)
+        public async Task<List<Booking>> GetAllAsync(DateTime? date)
         {
-            if (string.IsNullOrEmpty(filter))
+            if (date != null) // if empty?
             {
                 return _context.Bookings.ToList();
             }
-            return _context.Bookings.Where(x => x.BookingDate == date ).ToList;
+            return _context.Bookings.Where(x => x.BookingDate == date ).ToList();
         }
+
     }
 }
