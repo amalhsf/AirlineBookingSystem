@@ -6,6 +6,6 @@
         Task DeleteAsync(int Id);
         Task UpdateAsync(Seat seat);
         Task<Seat> GetByIdAsync(int Id);
-        Task<List<Seat>> GetAllAsync(string? filter);
+        Task<List<Seat>> GetAllAsync(string? filter = null);
     }
 }

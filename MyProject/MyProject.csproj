@@ -19,4 +19,13 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Airport\" />
+    <Folder Include="Views\Booking\" />
+    <Folder Include="Views\Flight\" />
+    <Folder Include="Views\User\" />
+    <Folder Include="Views\Seat\" />
+    <Folder Include="Views\Passenger\" />
+  </ItemGroup>
+
 </Project>

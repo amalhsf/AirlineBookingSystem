@@ -1,0 +1,60 @@
+﻿@model MyProject.Domain.Bookings.Booking
+
+<h2>Create Booking</h2>
+
+<div class="card shadow-sm p-4">
+
+    <form asp-action="Create" method="post">
+
+        <!-- Flight -->
+        <div class="mb-3">
+            <label class="form-label">Select Flight</label>
+            <select asp-for="FlightId"
+                    asp-items="ViewBag.FlightList"
+                    class="form-control">
+            </select>
+        </div>
+
+        <!-- Booking Date -->
+        <div class="mb-3">
+            <label class="form-label">Booking Date</label>
+            <input class="form-control"
+                   value="@Model.BookingDate.ToString("g")"
+                   disabled />
+        </div>
+
+        <!-- Status -->
+        <div class="mb-3">
+            <label class="form-label">Status</label>
+            <input class="form-control"
+                   value="@Model.Status"
+                   disabled />
+        </div>
+
+        <!-- User -->
+        <div class="mb-3">
+            <label class="form-label">User ID</label>
+            <input class="form-control"
+                   value="@Model.UserId"
+                   disabled />
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3">
+            <label class="form-label">Total Price</label>
+            <input class="form-control"
+                   value="Will be calculated after selecting flight"
+                   disabled />
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Confirm Booking
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            Back
+        </a>
+
+    </form>
+
+</div>

@@ -6,6 +6,6 @@
         Task DeleteAsync(int Id);
         Task UpdateAsync(Passenger passenger);
         Task<Passenger> GetByIdAsync(int Id);
-        Task<List<Passenger>> GetAllAsync(string? filter);
+        Task<List<Passenger>> GetAllAsync(string? filter = null);
     }
 }

@@ -1,0 +1,38 @@
+﻿@model MyProject.Domain.Airports.Airport
+
+@{
+    ViewData["Title"] = "Create Airport";
+}
+
+<h2>Create Airport</h2>
+
+<div class="card shadow-sm p-4">
+
+    <form asp-action="Create" method="post">
+
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">City</label>
+            <input asp-for="City" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Country</label>
+            <input asp-for="Country" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Code</label>
+            <input asp-for="Code" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+    </form>
+
+</div>

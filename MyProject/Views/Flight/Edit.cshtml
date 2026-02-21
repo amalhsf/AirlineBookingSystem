@@ -1,0 +1,68 @@
+﻿@model MyProject.Domain.Flights.Flight
+
+@{
+    ViewData["Title"] = "Edit Flight";
+}
+
+<h2>Edit Flight</h2>
+
+<div class="card shadow-sm p-4">
+
+    <form asp-action="Edit" method="post">
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label class="form-label">Flight Number</label>
+            <input asp-for="FlightNumber" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Aircraft</label>
+            <select asp-for="AircraftId"
+                    asp-items="ViewBag.AircraftList"
+                    class="form-control"></select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Departure Airport</label>
+            <select asp-for="DepartureAirportId"
+                    asp-items="ViewBag.AirportList"
+                    class="form-control"></select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Arrival Airport</label>
+            <select asp-for="ArrivalAirportId"
+                    asp-items="ViewBag.AirportList"
+                    class="form-control"></select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Departure Time</label>
+            <input asp-for="DepartureTime"
+                   type="datetime-local"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Arrival Time</label>
+            <input asp-for="ArrivalTime"
+                   type="datetime-local"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input asp-for="Price"
+                   type="number"
+                   step="0.01"
+                   class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+    </form>
+
+</div>

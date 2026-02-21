@@ -1,0 +1,47 @@
+﻿@model List<MyProject.Domain.Flights.Flight>
+
+@{
+    ViewData["Title"] = "Flights";
+}
+
+<h2 class="mb-4">Flights List</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Flight</a>
+</p>
+
+<table class="table table-bordered table-hover shadow-sm">
+    <thead class="table-dark">
+        <tr>
+            <th>Flight #</th>
+            <th>Aircraft</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Price</th>
+            <th style="width:160px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var flight in Model)
+        {
+            <tr>
+                <td>@flight.FlightNumber</td>
+                <td>@flight.Aircraft?.Model</td>
+                <td>@flight.DepartureAirport?.Name</td>
+                <td>@flight.ArrivalAirport?.Name</td>
+                <td>@flight.DepartureTime.ToString("g")</td>
+                <td>@flight.ArrivalTime.ToString("g")</td>
+                <td>@flight.Price</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@flight.Id"
+                       class="btn btn-sm btn-warning">Edit</a>
+
+                    <a asp-action="Delete" asp-route-id="@flight.Id"
+                       class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

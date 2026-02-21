@@ -6,6 +6,6 @@
         Task DeleteAsync(int Id);
         Task UpdateAsync(Flight flight);
         Task<Flight> GetByIdAsync(int Id);
-        Task<List<Flight>> GetAllAsync(string? filter);
+        Task<List<Flight>> GetAllAsync(string? filter = null);
     }
 }

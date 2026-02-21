@@ -1,0 +1,29 @@
+﻿@model MyProject.Domain.Flights.Flight
+
+@{
+    ViewData["Title"] = "Delete Flight";
+}
+
+<h2>Delete Flight</h2>
+
+<div class="card shadow-sm p-4">
+
+    <p class="text-danger fw-bold">
+        Are you sure you want to delete this flight?
+    </p>
+
+    <div class="mb-3">
+        <strong>Flight Number:</strong> @Model.FlightNumber <br />
+        <strong>From:</strong> @Model.DepartureAirport?.Name <br />
+        <strong>To:</strong> @Model.ArrivalAirport?.Name <br />
+        <strong>Price:</strong> @Model.Price
+    </div>
+
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+
+</div>

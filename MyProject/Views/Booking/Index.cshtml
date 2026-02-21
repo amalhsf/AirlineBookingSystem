@@ -1,0 +1,64 @@
+﻿@model List<MyProject.Domain.Bookings.Booking>
+@using MyProject.Domain.Bookings
+
+@{
+    ViewData["Title"] = "Bookings";
+}
+
+<h2 class="mb-4">Bookings List</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create Booking</a>
+</p>
+
+<table class="table table-bordered table-hover shadow-sm">
+    <thead class="table-dark">
+        <tr>
+            <th>Flight</th>
+            <th>Booking Date</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th style="width:200px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr>
+                <td>@booking.Flight?.FlightNumber</td>
+                <td>@booking.BookingDate.ToString("g")</td>
+                <td>@booking.TotalPrice</td>
+
+                <td>
+                    @if (booking.Status == BookingStatus.Pending)
+                    {
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    }
+                    else if (booking.Status == BookingStatus.Confirmed)
+                    {
+                        <span class="badge bg-success">Confirmed</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Cancelled</span>
+                    }
+                </td>
+
+                <td>
+                    @if (booking.Status == BookingStatus.Pending)
+                    {
+                        <form asp-action="Confirm" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@booking.Id" />
+                            <button class="btn btn-sm btn-success">Confirm</button>
+                        </form>
+
+                        <form asp-action="Cancel" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@booking.Id" />
+                            <button class="btn btn-sm btn-danger">Cancel</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
